@@ -1,0 +1,652 @@
+	.create-appointments-modal
+	, .read-appointment-modal
+	, .edit-appointments-modal{
+		
+	}
+	ol.nav.nav-tabs li{
+		margin-bottom: 0px;
+	}
+	.calendarista.ui-dialog-content.ui-widget-content{}
+
+	.calendarista.ui-dialog-content.ui-widget-content .container-fluid{
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.create-appointments-modal.calendarista.ui-dialog-content.ui-widget-content .container-fluid{
+		margin-top: 10px;
+	}
+	.calendarista.ui-dialog-content.ui-widget-content .card
+	{
+		border: 0 none !important;
+	}
+	.calendarista.ui-dialog-content.ui-widget-content .calendarista .card-header{
+		padding: 0;
+		background: transparent;
+		border-width: 0;
+	}
+	.calendarista.ui-dialog-content.ui-widget-content .calendarista .card-body .form-check-label{
+		margin-bottom: .5rem;
+	}
+	.ui-dialog-buttonset  .calendarista-spinner.ui-widget.ui-button{
+		margin-right: 15px;
+		margin-top: 15px;
+	}
+	.hide {
+	  display: none !important;
+	}
+	.show {
+	  display: block !important;
+	}
+	.invisible {
+	  visibility: hidden;
+	}
+	.column-disabled{
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+	}
+	.column-pane{
+		background: #ffffff;
+		padding: 10px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		border: 1px solid #e5e5e5;
+		-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+		box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	}
+	.column-pane #projectId, .column-pane button{
+		vertical-align: initial !important;
+	}
+	.inline-block-checkbox
+	, .terminates-on{
+		margin-top: 0;
+	}
+	.inline-block-checkbox li{
+		display: inline-block;
+	}
+	input[readonly].enable-readonly-input{
+		background-color: #ffffff;
+	}
+	.ul-overflow{
+		max-height: 200px;
+		overflow: auto;
+		padding: 5px;
+	}
+	.ul-overflow>li{
+		padding: 5px;
+	}
+	.horizontal-list-item{
+		display: inline-block;
+		list-style-type: none;
+		margin-right: 15px;
+		padding: 5px;
+		float:left;
+	}
+	.medium-list-size{
+		width: 500px;
+	}
+	a.edit-linkbutton
+	, button.edit-linkbutton{
+		 background: none!important;
+		 border: none; 
+		 padding: 0!important;
+		 font: inherit;
+		 border-bottom: 1px solid transparent; 
+		 cursor: pointer;
+		 font-size: 12px;
+	}
+	.edit-linkbutton:hover{
+		border-bottom:1px solid #444; 
+	}
+	.list-content{
+		padding: 0 8px;
+	}
+	.calendarista-button-notice{
+		margin-top: 5px;
+		margin-right: 5px;
+	}
+	.count-badge{
+		display: inline-block;
+		background-color: #d54e21;
+		color: #fff;
+		font-size: 9px;
+		line-height: 17px;
+		font-weight: 600;
+		margin: 5px 0 0 2px;
+		vertical-align: top;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		z-index: 26;
+	}
+	.count-badge-value{
+		display: block;
+		padding: 0 6px;
+	}
+	.timeslot-selected{
+		background: #F1F1F1;
+	}
+	div.preview-icon
+	, div.preview-thumbnail
+	, div.image-url{
+		background-image: url('../img/no-preview-thumbnail.png');
+		background-size: cover;
+		border: 1px solid #ddd;
+		width: 27px;
+		height: 27px;
+		cursor: pointer;
+		display: inline-block;
+	}
+	td button.button.button-primary.remove-image{
+		height: 29px !important;
+		margin-top: 0px !important;
+	}
+	.calendarista-fixed {
+		position: fixed;
+		top: 32px;
+		z-index: 99999;
+	}
+	input.parsley-success,
+	select.parsley-success,
+	textarea.parsley-success {
+	  color: #468847 !important;
+	  background-color: #DFF0D8 !important;
+	  border: 1px solid #D6E9C6 !important;
+	}
+
+	input.parsley-error
+	, select.parsley-error
+	, textarea.parsley-error
+	, .parsley-required
+	, .parsley-email
+	, .parsley-number
+	, .parsley-integer
+	, .parsley-alphanum
+	, .parsley-url
+	, .parsley-minlength
+	, .parsley-maxlength
+	, .parsley-length
+	, .parsley-min
+	, .parsley-max
+	, .pasley-range
+	, .parsley-pattern
+	, .parsley-mincheck
+	, .parsley-maxcheck
+	, .parsley-check
+	, .parsley-type
+	, .parsley-custom-error-message {
+	  color: #B94A48 !important;
+	  background-color: #F2DEDE !important;
+	  border: 1px solid #EED3D7 !important;
+	}
+	.pad-left-right{
+		margin-right: 5px !important;
+		margin-left: 5px !important;
+	}
+	.index.notice, .index.error, .index.updated {
+		margin: 5px 15px 2px 0;
+	}
+	.calendarista-no-margin-notice{
+		margin: 5px 15px 0 0 !important;
+	}
+	.settings.notice,  .settings.error, .settings.updated {
+		margin: 15px 0 !important;
+		padding: 10px 12px !important;
+		line-height: 28px;
+	}
+	.empty-records{
+		padding-left: 7px;
+		color: #777;
+	}
+	.widget-heading{
+		padding-left: 7px;
+	}
+	.ui-sortable-helper  {
+		border: 1px dashed #000;
+		border-bottom-width: 1px !important;
+	}
+	.accordion-section .calendarista-drag-handle{
+		cursor: move;
+	}
+	.calendarista-accordion-selected{
+		background: #dfdfdf !important;
+	}
+	.accordion-section{
+		border-bottom-width: 0;
+	}
+	.accordion-section-content.ui-accordion-content{
+		border-width: 0;
+	}
+	.accordion-section-title.ui-accordion-header{
+		border: 1px solid #e5e5e5;
+	}
+	h3.accordion-section-title{
+		margin: 0 !important;
+		cursor: default !important;
+	}
+	.control-section.accordion-section{
+		padding: 1px;
+	}
+	.control-section .accordion-section-title.ui-state-active{
+		color: #23282d;
+		background: #f5f5f5;
+	}
+	.control-section .accordion-section-title, 
+	.customize-pane-child .accordion-section-title{
+		border-left: 1px solid #e5e5e5 !important;
+		border-right: 1px solid #e5e5e5 !important;
+	}
+
+	.accordion-section {
+		border-bottom: none !important;
+	}
+	div.project-items .ui-accordion-header-icon.ui-icon
+	, div.project-items .accordion-section-title:after, .control-section .accordion-section-title:after{
+		display: none !important;
+	}
+	div.optional-items .ui-accordion-header-icon.ui-icon
+	, div.optional-items .accordion-section-title:after, .control-section .accordion-section-title:after{
+		display: none !important;
+	}
+	.calendarista-borderless-accordion .ui-accordion-header-icon{
+		display: inline !important;
+	}
+	.calendarista-borderless-accordion .ui-state-default
+	, .calendarista-borderless-accordion .ui-widget-content .ui-state-default
+	, .calendarista-borderless-accordion .ui-widget-header .ui-state-default
+	, .calendarista-borderless-accordion .ui-state-active
+	, .calendarista-borderless-accordion .ui-widget-content .ui-state-active
+	, .calendarista-borderless-accordion .ui-widget-header .ui-state-active
+	, .calendarista-borderless-accordion .ui-widget-content{
+		border-width: 0;
+		background: transparent;
+	}
+	.calendarista-borderless-accordion .ui-state-focus { 
+		outline: none; 
+	}
+	.calendarista-borderless-accordion .ui-accordion-header {
+		outline: none;
+	}
+	.calendarista-borderless-accordion .ui-accordion .ui-accordion-content{
+		
+	}
+	div.project-items{
+		padding: 0 !important;
+	}
+	.timeslot-selected{
+		background: #F1F1F1;
+	}
+	.items{
+		padding: 0 !important;
+	}
+	.action-list li{
+		display: inline-block;
+	}
+	.table-selected-row{
+		background: #dcdcdc;
+	}
+	.before-delete-notice{
+		margin-top: 5px;
+		margin-right: 5px;
+	}
+	/*map styles*/
+	.place-editor-form{
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.departure-places-list
+	, .destination-places-list{
+		max-width: 315px;
+	}
+	th.text-align-right{
+		text-align: right;
+	}
+	div#widgets-left{
+		padding-top: 0;
+	}
+	td button.button.button-primary{
+		height: 25px;
+		margin-top: 1px;
+	}
+	.ui-accordion-header-icon{
+		display: none;
+	}
+	
+	.minimum-unit{
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	.woald-content
+	, .woald-container
+	, .woald-map{
+		height: 100%;
+		width: 100%;
+	}
+	.woald-map-col{
+		height: 100%;
+	}
+	.woald-map-canvas { 
+		height: 500px;
+		width: 100%;
+	}
+	.woald-text-center{
+		text-align: center;
+	}
+	.woald-creator-contextmenu{
+		position: absolute;
+		width: 320px;
+		z-index: 1;
+		overflow: auto;
+		max-height: 200px;
+	}
+	.woald-creator-contextmenu a
+	, .woald-creator-contextmenu a:hover{
+		text-decoration: none;
+	}
+	.ui-menu .ui-state-focus
+	, .ui-menu .ui-state-active{
+		margin: 0;
+	}
+	.woald-creator-contextmenu li{
+		border-width: 0!important;
+	}
+	.woald-waypoints-placeholder .button-search{
+		margin-left: 4px;
+		margin-right: 3px;
+	}
+	li.ui-menu-item{
+		padding: 0;
+	}
+	li.ui-menu-item a{
+		display: block;
+	}
+	div.nav-tab button{
+		line-height: normal !important;
+		height: 24px !important;
+		border-width: 0 !important;
+		background: transparent !important;
+		-webkit-box-shadow: none !important;
+			box-shadow: none !important;
+	}
+	
+	.calendarista .alert {
+	  padding: 15px;
+	  margin-top: 10px;
+	  margin-bottom: 10px;
+	  border: 1px solid transparent;
+	  border-radius: 4px;
+	}
+
+	.calendarista .alert-warning {
+	  color: #8a6d3b;
+	  background-color: #fcf8e3;
+	  border-color: #faebcc;
+	}
+	/*manage appointments*/
+	.calendaristang-info-column{
+		padding: 10px;
+		border: 1px solid #dcdcdc;
+	}
+	.calendarista-textarea-nowrap{
+		white-space: nowrap;
+	}
+	.calendarista-stylepage-overflow{
+		overflow: auto;
+		width: 100%;
+		height: 500px;
+		background: #fafafa !important;
+		color: #000 !important;
+		border: 1px solid rgba(0, 0, 0, 0)!important;
+	}
+	.calendarista-invisible{
+		visibility: hidden;
+	}
+	.calendarista-hide{
+		display: none;
+	}
+	.calendarista-align-left{
+		text-align: left;
+	}
+	.calendarista-align-center{
+		text-align: center;
+	}
+	th.calendarista-align-right
+	, td.calendarista-align-right
+	, .calendarista-align-right{
+		text-align: right !important;
+	}
+	.calendarista-notice{
+		margin-right: 0px !important;
+		margin-left: 0px !important;
+		box-shadow: none !important;
+	}
+	.timeslot-selected{
+		font-weight: bold;
+		font-style: italic;
+		background: #dcdcdc;
+	}
+	.widefat th input{
+		margin: 0 0 0 0 !important;
+	}
+	.calendarista-widgets-right{
+		padding: 15px;
+	}
+	.calendarista-linethrough{
+		text-decoration: line-through;
+	}
+	.calendarista-dummy-datepicker{
+		height: 0px;
+		width:0px; 
+		border: 0px;
+		margin-left: 0 !important; 
+		visibility: hidden;
+	}
+	.form-table div>label{
+		font-weight: bold;
+	}
+	.nav-tab.nav-tab-disabled{background-color:#fff;color:#464646;cursor: default}
+	.calendarista-welcome-logo{
+		text-align: center;
+		padding: 10px;
+	}
+	.calendarista-dialog .ui-dialog-titlebar-close:before{
+		display: none !important;
+	}
+	.calendarista-spinner.ui-widget.ui-button{
+		border-width: 0 !important;
+		background: transparent !important;
+		-webkit-box-shadow: none !important;
+		-moz-box-shadow: none !important;
+		box-shadow: none !important;
+	}
+	.calendarista-uppercase{
+		text-transform: uppercase;
+	}
+	.form-table.nsl-modal
+	, .form-table.nsl-modal td
+	, .form-table.nsl-modal td p
+	, .form-table.nsl-modal th{
+		font-size: 13px !important;
+	}
+	div.notification-flat{
+		-webkit-box-shadow: none !important;
+		-moz-box-shadow: none !important;
+		box-shadow: none !important;
+	}
+	.calendarista.nav-tab-wrapper a{
+		color: #000;
+		text-decoration: none;
+		background-color: #e5e5e5;
+	}
+	.calendarista.nav-tab-wrapper a:hover {
+		color: #444;
+		text-decoration: none;
+		background-color: #fff;
+	}
+	.calendarista.nav-tab-wrapper a.nav-tab-active{
+		background-color: transparent;
+	}
+	table.calendarista.widefat {
+		border: 1px solid #d8d8d8;
+	}
+	table.calendarista.widefat th
+	,table.calendarista.widefat td 
+	{
+		border-left: 1px solid #d8d8d8;
+		border-right: 1px solid #d8d8d8;
+		border-bottom: 1px solid #d8d8d8;
+	}
+	.calendarista .alternate
+	, .calendarista.striped>tbody>:nth-child(odd)
+	, ul.calendarista.striped>:nth-child(odd) {
+		background-color: #eaeaea;
+	}
+	.wp-core-ui .button.button-small{
+		margin-left: 5px;
+	}
+	.wp-picker-container .wp-color-result.button {
+		padding: 0 0 0 29px;
+	}
+	.wp-core-ui select.custom-select{
+		max-width: 100%;
+	}
+	.calendarista-setup-steps {
+		margin: 1em 0 2em;
+		overflow: hidden
+	}
+	.calendarista-setup-steps li {
+		width: 20%;
+		padding: 7px 1em;
+		font-weight: 700;
+		margin: 0;
+		color: #eee;
+		background: #222;
+		float: left;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box
+	}
+
+	.calendarista-setup-steps li:first-child {
+		margin-left: 0
+	}
+
+	.calendarista-setup-steps li.calendarista-setup-active-step {
+		background: #0074a2;
+		color: #eee
+	}
+	.calendarista-license-warning{
+		color: red !important;
+	}
+	.calendarista-connect-heading{
+		padding: 10px;
+	}
+	.calendarista select{
+		max-width: 100%;
+	}
+	.calendarista-rounded-border{
+		border: 1px solid; 
+		padding: 3px 5px;
+	}
+	.calendarista input.form-check-input{
+		height: 1rem;
+		width: 1rem;
+	}
+	.form-check-inline label.calendarista-typography--caption1
+	, .form-check label.calendarista-typography--caption1{
+		line-height: 1.25rem;
+	}
+	/*betheme override*/
+	.theme_page_be-options #wpbody-content > div.updated.notice{
+		display: block !important;
+	}
+.calendarista-admin-fullcalendar{
+	margin: 5px;
+	padding: 5px;
+}
+.calendarista-fc-title-item{
+	font-weight: normal;
+}
+.fc-view.fc-month-view.fc-basic-view {
+	background: #fff;
+}
+.fc-day-grid-event .fc-content{
+	white-space: normal;
+}
+.fc-title{
+	display: block;
+	padding: 5px;
+	font-size: 1.2em;
+}
+.fc-toolbar button {
+	font-size: 14px;
+	padding: 3px 18px;
+}
+.calendarista-fc-title-heading{
+	font-size: 12px;
+}
+.calendarista-fc-title-item{
+	font-size: 12px;
+}
+.calendarista-button-notice{
+	margin-top: 5px;
+	margin-right: 5px;
+}
+.fc-title{
+	display: block;
+}
+.calendarista-admin-fullcalendar .calendarista-more{
+	visibility: hidden;
+	position: absolute;
+	opacity: 0;
+	/*-webkit-transition: visibility 0s, opacity 0.5s linear;
+	-moz-transition: visibility 0s, opacity 0.5s linear;
+	-o-transition: visibility 0s, opacity 0.5s linear;
+	transition: visibility 0s, opacity 0.5s linear;*/
+}
+.calendarista-admin-fullcalendar .fc-more-popover .calendarista-more-info{
+	display: none;
+}
+.calendarista-admin-fullcalendar .fc-more-popover .calendarista-more{
+	position: static;
+	visibility: visible;
+	opacity: 1;
+}
+.calendarista-admin-fullcalendar .fc-widget-title
+, .calendarista-admin-fullcalendar .fc-title{
+	cursor: pointer;
+}
+.fc-toolbar.fc-header-toolbar .fc-center>h2:hover{
+	color: #00a0d2;
+	cursor: pointer;
+}
+.fc-toolbar.fc-header-toolbar .fc-center>h2:after {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'FontAwesome';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: "\f073";
+	margin-left: 5px;
+}
+/*wordpress overrides bootstrap cards, so undo*/
+.card{
+  position: relative;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -ms-flex-direction: column !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  word-wrap: break-word !important;
+  background-color: #fff !important;
+  background-clip: border-box !important;
+  border-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.calendarista-more-info.fa-address-card:before{
+	background: #000;
+}

@@ -1,0 +1,8 @@
+Hello {{customer_name}},
+<br>You have received a {{discount_amount}} coupon. You can redeem this coupon during checkout. 
+<br>The coupon code is: <strong>{{coupon_code}}</strong>.
+{{#if_limited_by_service}}
+<br><br>This coupon can be claimed on {{service_name}} only.
+{{/if_limited_by_service}}
+<br><br>When it comes to saving money, we are your friend.
+<br>The {{site_name}} team

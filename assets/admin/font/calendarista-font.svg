@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2018 by original authors @ fontello.com</metadata>
+<defs>
+<font id="calendarista-font" horiz-adv-x="1000" >
+<font-face font-family="calendarista-font" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="calendar-circled" unicode="&#xe801;" d="M0 350q0 207 147 354t353 146 354-146 146-354-146-354-354-146-353 146-147 354z m219-314l562 0 0 408-562 0 0-408z m0 443l562 0 0 139-68 0 0-88-127 0 0 88-172 0 0-88-127 0 0 88-68 0 0-139z m105 88l53 0 0 98-53 0 0-98z m37-391l47 0q2-35 30-35 33 2 33 39 0 24-16 29-12 6-43 6l0 35q53-1 53 30 0 33-27 33-32-2-32-29l-45 0q2 31 25 48t53 16q51 0 67-39 10-27 2-45-10-21-39-31 49-14 49-57-2-31-26-51t-53-19q-78 0-78 70z m178 92l0 39q35 16 59 37l41 0 0-234-45 0 0 189q-24-21-55-31z m84 299l53 0 0 98-53 0 0-98z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

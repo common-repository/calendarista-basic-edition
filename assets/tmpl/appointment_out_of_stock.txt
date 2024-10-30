@@ -1,0 +1,3 @@
+Hello {{customer_name}},
+<br>The appointment you tried to book is no longer available. If you tried paying for it, we did not charge you. Feel free to book another available date.
+<br>The {{site_name}} team

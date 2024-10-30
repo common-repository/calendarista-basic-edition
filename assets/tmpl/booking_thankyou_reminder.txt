@@ -1,0 +1,4 @@
+Hello {{customer_name}},
+Please rate us if you have time.
+<br><br>Thank you for having booked with us.
+<br>The {{site_name}} team

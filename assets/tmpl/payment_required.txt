@@ -1,0 +1,8 @@
+Hello {{customer_name}},
+<br>Your booking for {{service_name}} is pending payment.
+<br>
+Payment instructions below:
+<br><br>
+Invoice ID: {{invoice_id}}
+<br><br>Thank you.
+<br>The {{site_name}} team

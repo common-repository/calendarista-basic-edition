@@ -1,0 +1,15 @@
+Guests
+Export
+White label
+Google Calendar
+ICAL Feeds
+Woocommerce
+Stripe
+Zapier
+Twilio
+User profile page (upcoming appointments/appointments history)
+Translations via Polylang
+Translations via WPML
+
+Note: The above list are premium features. For more info, please visit our website at the following URL : 
+https://www.calendarista.com/features/

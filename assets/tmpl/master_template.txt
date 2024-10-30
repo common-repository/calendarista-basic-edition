@@ -1,0 +1,79 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+				<title>{{site_name}}</title>
+			</head>
+			<body style="height: 100%; width: 100% !important;margin: 0 !important;color:{{body_font_color}};background-color:#ffffff">
+				<!-- HEADER -->
+				<table style="width: 100%;color:{{header_font_color}};background-color:{{header_background_color}}">
+					<tr>
+						<td></td>
+						<td style="margin: 0 auto !important;max-width: 600px !important;">
+							<div style="margin: 0 auto; padding: 15px; max-width: 600px;">
+								<table style="width: 100%;">
+									<tr>
+										<td>
+											<!--Your logo goes below-->
+											{{#has_header_image}}
+											<img src="{{header_image}}" style="max-width: 100%;">
+											{{/has_header_image}}
+											</td>
+											<td align="right">
+												<h6 class="collapse" style="margin: 0!important; padding: 0; margin-bottom: 15px; text-transform: uppercase;">
+													{{{site_title}}}
+												</h6>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+					</table>
+					<!-- /HEADER -->
+					<!-- BODY -->
+					<table style="width: 100%;">
+						<tr>
+							<td></td>
+							<td style="margin: 0 auto!important;max-width: 600px!important;">
+								<div class="content" style="margin: 0 auto; padding: 15px; max-width: 600px;">
+									<table style="width: 100%;">
+										<tr>
+											<td>
+													<!--Your content goes below-->
+													{{{mail_content}}}
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+					</table>
+					<!-- /BODY -->
+					<!-- FOOTER -->
+					<table style="width: 100%;">
+						<tr>
+							<td></td>
+							<td style="margin: 0 auto !important;max-width: 600px !important;">
+								<div style="margin: 0 auto; padding: 15px; max-width: 600px;">
+									<table style="width: 100%;">
+										<tr>
+											<td align="center" >
+												<p style="margin: 0; padding: 0; margin-bottom: 10px;">
+													<!--Your footer goes below-->
+													@ Copyright {{current_year}} 
+													<a href="{{site_url}}">{{site_name}}</a>. All rights reserved.
+												</p>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+					</table>
+					<!-- /FOOTER -->
+				</body>
+			</html>

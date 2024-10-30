@@ -1,0 +1,1 @@
+Copyright @ 2014  Alessandro Zifiglio. All rights reserved. http://www.typps.com Licensing from code canyon applies. 

@@ -1,0 +1,20 @@
+Hello {{customer_name}},
+<br>This is to confirm that we have received payment regarding your booking  for a {{service_name}} that begins on {{start_datetime}} 
+{{#if_has_end_date}} 
+	through {{end_datetime}} 
+{{/if_has_end_date}} 
+{{#if_has_return_trip}} 
+	and a return trip on {{end_datetime}}
+{{/if_has_return_trip}}
+{{#if_has_group_booking}}
+<br>This is a booking for {{booked_seats_count}} seats.
+{{/if_has_group_booking}}
+{{#if_has_dynamic_fields}}
+<br>{{{dynamic_fields}}}
+{{/if_has_dynamic_fields}}
+{{#if_has_cost}}
+	<br>The total amount paid is {{total_amount_paid}}.
+{{/if_has_cost}}
+<br><br>
+Invoice ID: {{invoice_id}}
+<br>The {{site_name}} team

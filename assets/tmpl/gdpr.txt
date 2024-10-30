@@ -1,0 +1,10 @@
+Hello {{customer_name}},
+<br>This is to inform you that if you ever need to download a copy of your appointments to verify the data stored on your account, 
+you may do so by following the link below:
+{{gdpr_url}}
+<br><br>
+You may also use the above link to delete your appointment history and associated data.
+<br>
+Please do not share this link with anyone and ensure you access it from a secure location.
+<br><br>Thank you for booking with us.
+<br>The {{site_name}} team

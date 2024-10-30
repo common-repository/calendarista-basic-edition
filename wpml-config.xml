@@ -1,0 +1,5 @@
+<wpml-config>
+    <custom-fields>
+        <custom-field action="copy">calendarista_page_type</custom-field>
+    </custom-fields>
+</wpml-config>

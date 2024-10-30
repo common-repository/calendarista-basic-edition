@@ -1,0 +1,538 @@
+<?xml version="1.0"?>
+<!--
+	Build script created for Calendarista by Alessandro Zifiglio.
+	Copyright @ 2014. All rights reserved. http://www.calendarista.com
+-->
+<project name="structured" default="deploy">
+  <loadfile failonerror="no" srcFile="version.txt"
+  property="release.version">
+    <filterchain>
+      <striplinebreaks />
+    </filterchain>
+  </loadfile>
+  <!-- all values pointing to files and folders are case sensitive -->
+  <!-- dist-->
+  <property name="release.filename"
+  value="calendarista.${release.version}" />
+  <property name="dist.dir" value="dist/${release.filename}" />
+  <property name="dist.dir.scripts" value="${dist.dir}/scripts" />
+  <property name="dist.dir.css" value="${dist.dir}/css" />
+  <property name="dist.dir.docs" value="${dist.dir}/docs" />
+  <regexp id="folderstructure" pattern="^(.+)[\\\/]([^\\\/]+)$" />
+  <!-- src-->
+  <property name="src.dir" value="src/com/calendarista" />
+  <property name="src.dir.scripts" value="${src.dir}/scripts" />
+  <property name="src.dir.css" value="${src.dir}/css" />
+  <property name="src.dir.html" value="${src.dir}/html" />
+  <property name="src.dir.handlebars" value="${src.dir}/handlebars" />
+  <property name="src.dir.file.handlebars.hash" value="${src.dir.handlebars}/hash.hbs" />
+  <property name="src.dir.file.handlebars.partial" value="${src.dir.handlebars}/partial.hbs" />
+  <property name="src.dir.docs" value="${src.dir}/docs" />
+  
+  <property name="src.dir.home" value="${basedir}" />
+  <property name="src.dir.home.scripts" value="${src.dir.home}/scripts" />
+  <property name="src.dir.home.css" value="${src.dir.home}/css" />
+  <property name="relative.src.dir.home" value="${src.dir.home}\home" />
+  
+  <property name="relative.src.dir.css" value="${basedir}\src\com\calendarista\css" />
+  <property name="relative.src.dir.tests" value="${basedir}\src\com\calendarista\tests" />
+  <property name="relative.src.dir.html" value="${basedir}\src\com\calendarista\html" />
+  <property name="relative.src.file.handlebars.base" value="${basedir}\src\com\calendarista\handlebars\base.hbs" />
+  <property name="relative.src.file.handlebars.hash" value="${basedir}\src\com\calendarista\handlebars\hash.hbs" />
+  <property name="relative.src.file.handlebars.partials" value="${basedir}\src\com\calendarista\handlebars\partial.hbs" />
+  <property name="relative.src.dir.handlebars.partials" value="${basedir}\src\com\calendarista\handlebars\partials" />
+  
+  <property name="src.dir.tests" value="${src.dir}/tests" />
+  <property name="src.dir.tests.scripts" value="${src.dir}/tests/scripts" />
+  <property name="src.dir.tests.css" value="${src.dir}/tests/css" />
+  <property name="test.framework" value="yahoo" /><!-- only yahoo supported for now-->
+  
+  <!-- provide port for our webserver running under phantomjs-->
+  <property name="home.port" value="88" />   
+  <property name="test.port" value="89" />   
+  <!-- compiler tools-->
+  <property name="tools.dir" value="../../../../../../../../DevTools/Apps/compilers" />
+  <property name="googleclosure"
+  value="${tools.dir}/compiler.jar" />
+  <property name="phantomjs.startwebserver"
+  value="${tools.dir}/phantomjs/start-webserver.js" />
+  <property name="phantomjs.testrunner"
+  value="${tools.dir}/phantomjs/testrunner.js" />
+  
+  <property name="phantomjs.less.css"
+  value="${tools.dir}/phantomjs/run-less-css.js" />
+  <property name="phantomjs.handlebars.parser"
+  value="${tools.dir}/phantomjs/run-handlebars-parser.js" />
+  <!-- ADVANCED_OPTIMIZATIONS or SIMPLE_OPTIMIZATIONS-->
+  <property name="closureoptimizations"
+  value="SIMPLE_OPTIMIZATIONS" />
+  
+  <property name="js.doc"
+  value="${tools.dir}/jsdoc-toolkit/jsrun.jar" />
+  <property name="js.doc.run"
+  value="${tools.dir}/jsdoc-toolkit/app/run.js" />
+  <property name="js.doc.templates"
+  value="${tools.dir}/jsdoc-toolkit/templates/jsdoc" />
+  <property name="yuicompressor"
+  value="${tools.dir}/yuicompressor-2.4.2.jar" />
+  <!-- ignore files, use it to provide conditional assembly of src files. an empty string assembles all files-->
+  <property name="css.exclude" value="" />
+  <property name="scripts.exclude" value="" />
+  <property name="docs.exclude" value="" />
+  <property name="target.zip"
+  value="${dist.dir}/${release.filename}.zip" />
+  <!-- we are using tasks available in ant-contrib, a separate project: 
+    Tasks used so far : 
+    1) For task -->
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+    <classpath>
+      <pathelement location="${tools.dir}/ant-contrib-0.6.jar" />
+    </classpath>
+  </taskdef>
+  <target name="jsdocs">
+    <for param="root">
+      <path>
+        <!-- exclude the root scripts folder, note includes param -->
+        <dirset dir="${src.dir.scripts}" includes="**/*">
+          <depth max="0" />
+        </dirset>
+      </path>
+      <sequential>
+        <echo message="running js-doc ${js.doc}" />
+        <propertyregex override="yes" property="rootfoldername"
+        input="@{root}" replace="\2">
+          <regexp refid="folderstructure" />
+        </propertyregex>
+        <apply executable="java">
+          <arg line="-jar" />
+          <arg path="${js.doc}" />
+          <arg path="${js.doc.run}" />
+          <arg value="--allfunctions" />
+          <arg line="--template=${js.doc.templates}" />
+          <arg line="--directory=${src.dir.docs}/${rootfoldername}" />
+          <arg line="--suppress" />
+          <fileset dir="@{root}"
+          includes="${rootfoldername}.debug.js"
+          excludes="${docs.exclude}, *.min.js" />
+        </apply>
+        <echo message="finished documenting javascript in @{root}\${rootfoldername}.debug.js" />
+      </sequential>
+    </for>
+  </target>
+  <target name="concatjs">
+    <for param="root">
+      <path>
+        <!-- exclude the root scripts folder, note includes param -->
+        <dirset dir="${src.dir.scripts}" includes="**/*">
+          <depth max="0" />
+        </dirset>
+      </path>
+      <sequential>
+        <echo message="assembling *.js files in @{root} directory" />
+        <propertyregex override="yes" property="rootfoldername"
+        input="@{root}" replace="\2">
+          <regexp refid="folderstructure" />
+        </propertyregex>
+        <delete>
+          <fileset dir="@{root}/"
+          includes="*.min.js, *.debug.js" />
+        </delete>
+        <for param="child">
+          <path>
+            <dirset dir="@{root}" />
+          </path>
+          <sequential>
+            <propertyregex override="yes" property="foldername"
+            input="@{child}" replace="\2">
+              <regexp refid="folderstructure" />
+            </propertyregex>
+            <echo message="assembling *.js files into unified file : @{root}\${rootfoldername}.debug.js" />
+            <concat destfile="@{root}\${rootfoldername}.debug.js"
+            append="yes" fixlastline="yes">
+              <fileset dir="@{child}" includes="*.js"
+              excludes="${scripts.exclude}" />
+            </concat>
+          </sequential>
+        </for>
+		<echo message="creating copy of @{root}\${rootfoldername}.debug.js in home/scripts" />
+        <copy todir="${src.dir.home.scripts}">
+          <fileset file="@{root}\${rootfoldername}.debug.js" />
+        </copy>
+        <echo message="creating copy of @{root}\${rootfoldername}.debug.js in tests/scripts" />
+        <copy todir="${src.dir.tests.scripts}">
+          <fileset file="@{root}\${rootfoldername}.debug.js" />
+        </copy>
+		<echo message="creating copy of @{root}\${rootfoldername}.debug.js in dist" />
+		<copy todir="${dist.dir.scripts}">
+          <fileset file="@{root}\${rootfoldername}.debug.js" />
+        </copy>
+        <echo message="*.js files in @{root} concatenation complete" />
+        <echo message="completed assembling scripts" />
+      </sequential>
+    </for>
+  </target>
+  <target name="minifyjs" depends="concatjs">
+    <for param="root">
+      <path>
+        <!-- exclude the root scripts folder, note includes param -->
+        <dirset dir="${src.dir.scripts}" includes="**/*">
+          <depth max="0" />
+        </dirset>
+      </path>
+      <sequential>
+        <echo message="root folder is : @{root}" />
+        <propertyregex override="yes" property="rootfoldername"
+        input="@{root}" replace="\2">
+          <regexp refid="folderstructure" />
+        </propertyregex>
+        <echo message="begin compacting scripts..." />
+        <echo message="using compiler located at ${googleclosure}" />
+        <if>
+          <not>
+            <available file="@{root}\${rootfoldername}.extern.thirdparty.in" />
+          </not>
+          <then>
+            <echo message="creating a default extern file because one does not exist" />
+            <echo file="@{root}\${rootfoldername}.extern.thirdparty.in">
+            /*use this file to add all your third party library
+            externs(the bits in your api you do not want renamed by
+            the closure compiler)*/</echo>
+          </then>
+        </if>
+        <if>
+          <not>
+            <available file="@{root}\${rootfoldername}.extern.local.in" />
+          </not>
+          <then>
+            <echo message="creating a default local extern file because one does not exist" />
+            <echo file="@{root}\${rootfoldername}.extern.local.in">
+            /*use this file to your current library externs(the
+            bits in your api you do not want renamed by the closure
+            compiler)*/</echo>
+          </then>
+        </if>
+        <apply executable="java">
+          <arg line="-jar" />
+          <arg path="${googleclosure}" />
+          <arg line="--compilation_level=${closureoptimizations}" />
+          <arg line="--warning_level=VERBOSE" />
+          <!--<arg line="formatting=PRETTY_PRINT" />-->
+          <arg line="--externs=@{root}\${rootfoldername}.extern.thirdparty.in" />
+          <!-- a file containing methods in third party code that you don't want renamed-->
+          <arg line="--externs=@{root}\${rootfoldername}.extern.local.in" />
+          <!-- a file containing prop/method names you don't want renamed-->
+          <arg value="--js" />
+          <srcfile />
+          <arg value="--js_output_file" />
+          <targetfile />
+          <fileset dir="@{root}" includes="*.debug.js"
+          excludes="${scripts.exclude}" />
+          <mapper type="glob" from="*.debug.js"
+          to="${dist.dir.scripts}/*.${release.version}.min.js" />
+        </apply>
+		<copy todir="${src.dir.home.scripts}">
+          <fileset file="${dist.dir.scripts}/${rootfoldername}.${release.version}.min.js" />
+        </copy>
+		 <echo message="completed minifying javascript in ${src.dir.home.scripts} directory" />
+        <copy todir="${src.dir.tests.scripts}">
+          <fileset file="${dist.dir.scripts}/${rootfoldername}.${release.version}.min.js" />
+        </copy>
+		 <echo message="completed minifying javascript in ${src.dir.tests.scripts} directory" />
+		<copy todir="@{root}">
+          <fileset file="${dist.dir.scripts}/${rootfoldername}.${release.version}.min.js" />
+        </copy>
+        <echo message="completed copying ${dist.dir.scripts}/${rootfoldername}.${release.version}.min.js into @{root} directory" />
+      </sequential>
+    </for>
+  </target>
+  <target name="concatcss" depends="lesscss">
+    <for param="root">
+      <path>
+        <!-- exclude the root scripts folder, note includes param -->
+        <dirset dir="${src.dir.css}" includes="**/*">
+          <depth max="0" />
+        </dirset>
+      </path>
+      <sequential>
+        <echo message="assembling *.css files in @{root} directory" />
+        <propertyregex override="yes" property="rootfoldername"
+        input="@{root}" replace="\2">
+          <regexp refid="folderstructure" />
+        </propertyregex>
+        <delete>
+          <fileset dir="@{root}/"
+          includes="*.min.css, *.debug.css" />
+        </delete>
+        <for param="child">
+          <path>
+            <dirset dir="@{root}" />
+          </path>
+          <sequential>
+            <propertyregex override="yes" property="foldername"
+            input="@{child}" replace="\2">
+              <regexp refid="folderstructure" />
+            </propertyregex>
+            <echo message="assembling *.css files into unified file : @{root}\${rootfoldername}.debug.css" />
+            <concat destfile="@{root}\${rootfoldername}.debug.css"
+            append="yes" fixlastline="yes">
+              <fileset dir="@{child}" includes="*.css"
+              excludes="${css.exclude}" />
+            </concat>
+			<echo message="creating copy of @{root}\${rootfoldername}.debug.css in ${dist.dir.css}" />
+			<copy todir="${dist.dir.css}">
+			  <fileset file="@{root}\${rootfoldername}.debug.css" />
+			</copy>
+			<echo message="creating copy of @{root}\${rootfoldername}.debug.css in ${src.dir.home.css}" />
+			<copy todir="${src.dir.home.css}">
+			  <fileset file="@{root}\${rootfoldername}.debug.css" />
+			</copy>
+			<echo message="creating copy of @{root}\${rootfoldername}.debug.css in ${src.dir.tests.css}" />
+			<copy todir="${src.dir.tests.css}">
+			  <fileset file="@{root}\${rootfoldername}.debug.css" />
+			</copy>
+          </sequential>
+        </for>
+        <echo message="completed assembling css" />
+      </sequential>
+    </for>
+  </target>
+  <target name="minifycss" depends="concatcss">
+    <for param="root">
+      <path>
+        <!-- exclude the root scripts folder, note includes param -->
+        <dirset dir="${src.dir.css}" includes="**/*">
+          <depth max="0" />
+        </dirset>
+      </path>
+      <sequential>
+        <propertyregex override="yes" property="rootfoldername"
+        input="@{root}" replace="\2">
+          <regexp refid="folderstructure" />
+        </propertyregex>
+        <echo message="begin compacting..." />
+        <echo message="using compiler located at ${yuicompressor}" />
+        <apply executable="java">
+          <arg line="-jar" />
+          <arg path="${yuicompressor}" />
+          <srcfile />
+          <arg line="-o" />
+          <targetfile />
+          <arg line="--type css" />
+          <arg line="--charset utf-8" />
+          <arg line="-v" />
+          <fileset dir="@{root}" includes="*.debug.css"
+          excludes="${css.exclude}" />
+          <mapper type="glob" from="*.debug.css"
+          to="${dist.dir.css}/*.min.css" />
+        </apply>
+		<echo message="completed minifying css in ${dist.dir.css} directory" />
+		<copy todir="${src.dir.home.css}">
+          <fileset file="${dist.dir.css}/${rootfoldername}.min.css" />
+        </copy>
+        <echo message="completed copying minified ${dist.dir.css}/${rootfoldername}.min.css into ${src.dir.home.css} folder" />
+		<copy todir="${src.dir.tests.css}">
+          <fileset file="${dist.dir.css}/${rootfoldername}.min.css" />
+        </copy>
+        <echo message="completed copying minified ${dist.dir.css}/${rootfoldername}.min.css into ${src.dir.tests.css} folder" />
+        <copy todir="@{root}">
+          <fileset file="${dist.dir.css}/${rootfoldername}.min.css" />
+        </copy>
+        <echo message="completed copying minified ${dist.dir.css}/${rootfoldername}.min.css into @{root} folder" />
+      </sequential>
+    </for>
+  </target>
+<target name="startwebserver"> 
+	  <exec executable="phantomjs">
+		<arg value="${phantomjs.startwebserver}"/>
+		<arg value="${home.port}"/>	
+		<arg value="${relative.src.dir.home}" />
+	  </exec> 
+ </target>
+ <target name="lesscss"> 
+	  <exec executable="phantomjs">
+		<arg line="--web-security=false" />
+		<arg line="--local-to-remote-url-access=yes"/>
+		<arg value="${phantomjs.less.css}"/>
+		<arg value="${relative.src.dir.css}" />
+		<!-- The namespace for less processed css -->
+		<arg value="calendarista" />
+		<!-- arguments. to process less in a certain order, passing them below in the order we want them processed -->
+		<!--Core variables and mixins-->
+		<arg value="variables.less" />
+		<arg value="mixins.less" />
+
+		<!--  Reset-->
+		<arg value="normalize.less" />
+		<arg value="print.less" />
+
+		<!--  Core CSS-->
+		<arg value="scaffolding.less" />
+		<arg value="type.less" />
+		<arg value="code.less" />
+		<arg value="grid.less" />
+		<arg value="tables.less" />
+		<arg value="forms.less" />
+		<arg value="buttons.less" />
+
+		<!--  Components-->
+		<arg value="component-animations.less" />
+		<arg value="glyphicons.less" />
+		<arg value="dropdowns.less" />
+		<arg value="button-groups.less" />
+		<arg value="input-groups.less" />
+		<arg value="navs.less" />
+		<arg value="navbar.less" />
+		<arg value="breadcrumbs.less" />
+		<arg value="pagination.less" />
+		<arg value="pager.less" />
+		<arg value="labels.less" />
+		<arg value="badges.less" />
+		<arg value="jumbotron.less" />
+		<arg value="thumbnails.less" />
+		<arg value="alerts.less" />
+		<arg value="progress-bars.less" />
+		<arg value="media.less" />
+		<arg value="list-group.less" />
+		<arg value="panels.less" />
+		<arg value="responsive-embed.less" />
+		<arg value="wells.less" />
+		<arg value="close.less" />
+
+		<!--  Components w/ JavaScript-->
+		<arg value="modals.less" />
+		<arg value="tooltip.less" />
+		<arg value="popovers.less" />
+		<arg value="carousel.less" />
+
+		<!--  Utility classes-->
+		<arg value="utilities.less" />
+		<arg value="responsive-utilities.less" />
+	  </exec> 
+ </target>
+ <target name="testrunner" depends="minifyjs"> 
+	  <exec executable="phantomjs">
+		<arg value="${phantomjs.testrunner}"/>
+		<arg value="${test.port}"/>	
+		<arg value="${relative.src.dir.tests}" />
+		<arg value="${test.framework}"/>
+	  </exec> 
+ </target>
+ <target name="handlebars">
+	<if>
+		<not>
+			<available file="${src.dir.file.handlebars.hash}" />
+		</not>
+		<then>
+			<echo message="Creating hash file at ${src.dir.handlebars} for the handlebars templating engine" />
+			<echo file="${src.dir.file.handlebars.hash}">{}</echo>
+		</then>
+	</if>
+	<if>
+		<not>
+			<available file="${src.dir.file.handlebars.partial}" />
+		</not>
+		<then>
+			<echo message="Creating a partial file at ${src.dir.file.handlebars.partial} for the handlebars templating engine" />
+			<echo file="${src.dir.file.handlebars.partial}">{}</echo>
+		</then>
+	</if>
+	<if>
+		<not>
+			<available file="${src.dir.handlebars}/README.txt" />
+		</not>
+		<then>
+			<echo message="Creating a base template file at ${src.dir.handlebars}/README.txt for the handlebars templating engine" />
+			<echo file="${src.dir.handlebars}/README.txt">
+Your handlebar context information for handlebars goes in ${src.dir.file.handlebars.hash} as a JSON string.
+Your handlebar partials information for handlebars goes in ${src.dir.file.handlebars.partial} as a JSON string. 
+You can also add entire files containing handlebar partials to parse within separate *.hbs files but these need to be included
+inside the partials folder. The name of the partial is the filename less extension eg: base.hbs ( the name of this partial is base ).
+Your handlebar base template information for handlebars goes in ${src.dir.handlebars.partials}. 
+The handbar base template is going to be inherited by all your pages where you would override values in this base template in each of your pages.
+You don't have to do anything ofcourse. The build script takes care of everything else.
+			</echo>
+		</then>
+	</if>
+	<exec executable="phantomjs">
+		<arg value="${phantomjs.handlebars.parser}"/>
+		<arg value="${relative.src.dir.html}" />
+		<arg value="${relative.src.file.handlebars.hash}" />
+		<arg value="${relative.src.file.handlebars.partials}" />
+		<arg value="${relative.src.dir.handlebars.partials}" />
+		<arg value="${relative.src.dir.home}" />
+		<arg value="${relative.src.dir.html}" />
+	</exec> 
+ </target>
+  <target name="copy-dir">
+    <echo message="copying ${src.dir.docs} to ${dist.dir}" />
+    <copy todir="${dist.dir.docs}">
+      <fileset dir="${src.dir.docs}" />
+    </copy>
+  </target>
+  <target name="create-folder-structure" depends="clean">
+    <echo message="making project directory ${src.dir}" />
+    <mkdir dir="${src.dir}" />
+    <echo message="making ${src.dir.scripts} directory" />
+    <mkdir dir="${src.dir.scripts}" />
+    <echo message="making ${src.dir.css} directory" />
+    <mkdir dir="${src.dir.css}" />
+	<echo message="making ${src.dir.html} directory" />
+    <mkdir dir="${src.dir.html}" />
+	<echo message="making ${src.dir.handlebars} directory" />
+    <mkdir dir="${src.dir.handlebars}" />
+	<echo message="making ${src.dir.handlebars}/partials directory" />
+    <mkdir dir="${src.dir.handlebars}/partials" />
+    <echo message="making ${src.dir.home} directory" />
+    <mkdir dir="${src.dir.home}" />
+    <echo message="making ${src.dir.docs} directory" />
+    <mkdir dir="${src.dir.docs}" />
+	<echo message="making ${src.dir.tests} directory" />
+    <mkdir dir="${src.dir.tests}" />
+	<echo message="making ${src.dir.tests.css} directory" />
+    <mkdir dir="${src.dir.tests.css}" />
+	<echo message="making ${src.dir.tests.scripts} directory" />
+    <mkdir dir="${src.dir.tests.scripts}" />
+    <echo message="making ${dist.dir} directory" />
+    <mkdir dir="${dist.dir}" />
+    <echo message="making ${dist.dir.scripts} directory" />
+    <mkdir dir="${dist.dir.scripts}" />
+    <echo message="making ${dist.dir.css} directory" />
+    <mkdir dir="${dist.dir.css}" />
+  </target>
+  <target name="deploy"
+  depends="create-folder-structure, concatcss, lesscss, minifycss, concatjs, jsdocs, minifyjs, copy-dir, handlebars, testrunner">
+    <echo message="creating ${target.zip}" />
+    <zip destFile="${target.zip}">
+      <zipfileset dir="${dist.dir}" includes="**/*" />
+    </zip>
+  </target>
+  <target name="clean">
+    <delete failonerror="false" verbose="true">
+      <fileset dir="${dist.dir.scripts}" includes="*.js" />
+    </delete>
+    <delete failonerror="false" verbose="true">
+      <fileset dir="${dist.dir.css}" includes="*.css" />
+    </delete>
+    <delete failonerror="false" verbose="true">
+      <fileset dir="${dist.dir.docs}" includes="**/*" />
+    </delete>
+    <delete failonerror="false" verbose="true">
+      <fileset file="${target.zip}" />
+    </delete>
+  </target>
+  <!-- 
+    References for each type/task used : 
+     http://ant.apache.org/manual/Types/mapper.html
+     http://ant.apache.org/manual/Tasks/apply.html
+     http://ant.apache.org/manual/Tasks/concat.html
+     http://ant.apache.org/manual/Types/dirset.html
+     http://ant.apache.org/manual/Types/fileset.html
+     http://ant.apache.org/manual/Tasks/delete.html
+     http://ant.apache.org/manual/Tasks/mkdir.html
+     http://ant.apache.org/manual/Tasks/zip.html
+     http://ant.apache.org/manual/Types/zipfileset.html
+     http://ant.apache.org/manual/Tasks/condition.html
+     http://ant-contrib.sourceforge.net/tasks/tasks/if.html
+     http://ant-contrib.sourceforge.net/tasks/tasks/for.html
+  -->
+</project>

@@ -1,0 +1,47 @@
+Hello {{customer_name}},
+<br>You have made a booking for {{service_name}} that begins on {{start_datetime}} 
+{{#if_has_end_date}} 
+	through {{end_datetime}} 
+{{/if_has_end_date}} 
+{{#if_has_return_trip}} 
+	and a return trip on {{end_datetime}}
+{{/if_has_return_trip}}
+{{#if_has_from_address}}
+<br>Departure from {{from_address}}
+{{/if_has_from_address}}
+{{#if_has_waypoints}}
+<br>
+Stops on the way:
+<br>
+{{{stops}}}
+{{/if_has_waypoints}}
+{{#if_has_to_address}}
+<br>Destination to {{to_address}}
+{{/if_has_to_address}}
+{{#if_has_distance}}
+	<br>The total distance is for {{distance}} {{unitType}}.
+{{/if_has_distance}}
+{{#if_has_duration}}
+	<br>The estimated duration is {{duration}}.
+{{/if_has_duration}}
+{{#if_has_optionals}}
+	<br>The booking includes:
+	<br>{{{optionals}}}
+{{/if_has_optionals}}
+{{#if_has_custom_form_fields}}
+	<br>During the booking, you've also told us:
+	<br>{{{custom_form_fields}}}
+{{/if_has_custom_form_fields}}
+{{#if_has_cost}}
+	<br>The total cost of the booking is {{total_cost_value}} {{#if_has_return_trip}} and includes the return trip {{/if_has_return_trip}}
+{{/if_has_cost}}
+{{#if_has_group_booking}}
+<br>This is a booking for {{booked_seats_count}} seats.
+{{/if_has_group_booking}}
+{{#if_has_dynamic_fields}}
+<br>{{{dynamic_fields}}}
+{{/if_has_dynamic_fields}}
+<br><br>
+Invoice ID: {{invoice_id}}
+<br><br>Thank you for booking with us.
+<br>The {{site_name}} team

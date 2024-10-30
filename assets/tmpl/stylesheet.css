@@ -1,0 +1,116 @@
+.calendarista{
+	font-family: [font_family];
+}
+.calendarista .nav-item a:before {
+    background: [nav_item_background];
+}
+.calendarista .btn-secondary {
+  color: #fff;
+  background-color: [button_bg_color];
+  border-color: [button_border_color];
+}
+
+.calendarista .btn-secondary:hover {
+  color: #fff;
+  background-color: [button_hover_bg_color];
+  border-color: [button_border_hover_color];
+}
+
+.calendarista .btn-secondary:focus, .calendarista .btn-secondary.focus {
+  background-color: [button_focus_bg_color];
+  border-color: [button_focus_border_color];
+}
+
+.calendarista .btn-secondary.disabled, .calendarista .btn-secondary:disabled {
+  background-color: [button_bg_disabled_color];
+  border-color: [button_border_disabled_color];
+}
+
+.calendarista .btn-outline-secondary:hover {
+  background-color: [button_outline_bg_hover_color];
+  border-color: [button_outline_border_hover_color];
+}
+
+.calendarista .nav-item a {
+	color: [nav_item_color];
+}
+.calendarista .nav-item a.nav-item-active {
+	color: [nav_item_active_color];
+}
+.calendarista .nav-item a.nav-item-disabled {
+	color: [nav_item_disabled_color];
+	cursor: default !important;
+}
+.calendarista .nav-item a:hover{
+	color: [nav_item_hover_color] !important;
+}
+.calendarista .nav-item a.calendarista .nav-item-disabled:hover {
+	color: [nav_item_disabled_color] !important;
+}
+
+#calendarista-id .calendarista-available a{
+	background: #f68c1f !important;
+}
+#calendarista-id .calendarista-available span{
+	background: #f68c1f !important;
+}
+#calendarista-id .calendarista-available-legend{
+	background: #f68c1f
+}
+#calendarista-id .calendarista-unavailable span{
+	background: #f68c1f !important;
+}
+#calendarista-id .calendarista-unavailable-legend{
+	background: #f68c1f; opacity: .35;
+}
+#calendarista-id .calendarista-current a{
+	background: #c0830b !important;
+}
+#calendarista-id .calendarista-current-legend{
+	background: #c0830b
+}
+#calendarista-id .ui-state-disabled.calendarista-selectedday-range span {
+	background: #fef1e3 !important;
+}
+#calendarista-id .calendarista-halfday-legend{
+	background: #fef1e3;
+}
+#calendarista-id .calendarista-selectedday-range-legend{
+	background: #fef1e3 !important; opacity: .35;
+}
+#calendarista-id .calendarista-selectedday-range {
+	background: #fef1e3 !important;
+}
+#calendarista-id .calendarista-selectedday-range a{
+	background: #fef1e3 !important;
+}
+#calendarista_4 .calendarista-wizard-section-block-thumb {
+	border-width: 1px;
+}
+#calendarista_4 .calendarista-wizard-section-block-thumb {
+	border-color: #a59d0b;
+}
+#calendarista_4 .calendarista-wizard-section-block-thumb {
+	border-radius: 50%;
+}
+#calendarista_4 .calendarista-wizard-section-block-thumb {
+	box-shadow: inset 1px 1px 4px rgba(0,0,0,0.5), 0 2px 3px rgba(0,0,0,0.6);
+}
+#calendarista_4 .calendarista-wizard-section-block-thumb {
+	width: 180px;
+}
+#calendarista_4 .calendarista-wizard-section-block-thumb {
+	height: 180px;
+}
+#calendarista_4 .calendarista-wizard-section-block-thumb {
+	border-style: solid; 
+	z-index: 10000; 
+	position: absolute; 
+	left: 50%;
+	top: -91px;
+	margin: 0 0 0 -91px;
+}
+#calendarista_4 .calendarista-wizard-section-thumbnail {
+	margin: 101px auto 20px auto; 
+	padding: 101px 20px 20px 20px;
+}

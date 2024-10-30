@@ -1,0 +1,1 @@
+Copyright @ 2012  Alessandro Zifiglio. All rights reserved. Licensing from code canyon applies.

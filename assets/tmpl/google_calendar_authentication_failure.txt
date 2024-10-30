@@ -1,0 +1,9 @@
+Hello {{service_provider_name}},
+<br>This is to let you know that an error has occurred when trying to sync your appointment to Google Calendar. 
+To view the error, please go to the Settings -> Error Log page. 
+<br>
+<br>Google will invalidate your authentication token from time to time so this is the most likely cause.
+In order to resolve, please go to the Settings -> Connect page. If you do not see the "Authorize" button, click update on the Google profile once. 
+<br>
+This will enable the Authorize button. Use it to authenticate again.
+<br><br>The {{site_name}} team
